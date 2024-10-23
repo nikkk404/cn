@@ -1,0 +1,35 @@
+
+1st) 
+ping google.com
+traceroute google.com
+nslookup google.com
+netstat -tuln
+arp -a
+rarp -a
+ip addr show
+ifconfig
+dig google.com
+route -n
+
+5th)
+Nmap 
+Scan a Single IP Address: nmap 192.168.1.5
+Scan a Range of IP Addresses: nmap 192.168.1.1-10
+Scan an Entire Subnet: nmap 192.168.1.0/24
+Service Version Detection: nmap -sV 192.168.1.5
+Operating System Detection: nmap -O 192.168.1.5
+Aggressive Scan: nmap -A 192.168.1.5
+Scan Specific Ports: nmap -p 22,80,443 192.168.1.5
+
+9th)
+View Current Routing Table: netstat -rn
+Add a Route: sudo route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1
+Delete a Route: sudo route del -net 192.168.1.0 netmask 255.255.255.0
+Change the Default Gateway: sudo route add default gw 192.168.1.1
+Example using ip command: 
+# View routing table: ip route show
+# Add route: sudo ip route add 192.168.1.0/24 via 192.168.1.1
+# Delete route: sudo ip route del 192.168.1.0/24
+# Change default gateway: sudo ip route change default via 192.168.1.1
+
+

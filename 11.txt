@@ -1,0 +1,88 @@
+11th)TCP Server Example
+import socket
+
+# Create a TCP socket
+tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Bind the socket to an IP address and port
+tcp_server_socket.bind(('localhost', 12345))
+
+# Listen for incoming connections
+tcp_server_socket.listen(1)
+print("TCP server is listening on port 12345...")
+
+# Accept a connection
+connection, client_address = tcp_server_socket.accept()
+try:
+    print(f"Connection from {client_address}")
+
+    # Receive data from the client
+    while True:
+        data = connection.recv(1024)
+        if data:
+            print(f"Received: {data.decode()}")
+            # Send data back to the client
+            connection.sendall(data)
+        else:
+            break
+finally:
+    # Clean up the connection
+    connection.close()
+
+-----------------------
+TCP Client Example
+import socket
+
+# Create a TCP socket
+tcp_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connect to the server
+tcp_client_socket.connect(('localhost', 12345))
+
+# Send data to the server
+message = "Hello, Server!"
+tcp_client_socket.sendall(message.encode())
+
+# Receive data from the server
+data = tcp_client_socket.recv(1024)
+print(f"Received from server: {data.decode()}")
+
+# Close the socket
+tcp_client_socket.close()
+
+
+------------------------------
+UDP Server Example
+import socket
+
+# Create a UDP socket
+udp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Bind the socket to an IP address and port
+udp_server_socket.bind(('localhost', 12345))
+print("UDP server is listening on port 12345...")
+
+# Receive data from clients
+while True:
+    data, client_address = udp_server_socket.recvfrom(1024)
+    print(f"Received from {client_address}: {data.decode()}")
+    
+    # Send data back to the client
+    udp_server_socket.sendto(data, client_address)
+--------------------------------
+UDP Client Example
+import socket
+
+# Create a UDP socket
+udp_client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Send data to the server
+message = "Hello, Server!"
+udp_client_socket.sendto(message.encode(), ('localhost', 12345))
+
+# Receive response from the server
+data, server_address = udp_client_socket.recvfrom(1024)
+print(f"Received from server: {data.decode()}")
+
+# Close the socket
+udp_client_socket.close()
